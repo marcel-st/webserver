@@ -142,3 +142,12 @@ docker compose down --rmi local
 | Base OS   | Ubuntu 24.04 LTS (Noble Numbat) |
 | Web Server | Apache 2.4 (latest stable from Ubuntu repos) |
 | PHP Runtime | PHP (latest stable from Ubuntu repos) |
+
+## Release Notes
+
+### 2026-02-28
+
+- Added PHP support to the container image (`libapache2-mod-php`, `php`, `php-cli`).
+- Updated Apache vhost default index order to prefer `index.php`.
+- Added `html/index.php` sample page for quick PHP verification.
+- Updated documentation to include PHP usage and testing guidance.
