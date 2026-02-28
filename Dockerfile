@@ -6,10 +6,13 @@ LABEL description="Apache HTTP Server on Ubuntu 24.04 LTS"
 # Prevent interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Apache and supporting packages
+# Install Apache, PHP, and supporting packages
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         apache2 \
+        libapache2-mod-php \
+        php \
+        php-cli \
         apt-utils \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

@@ -1,6 +1,6 @@
-# Apache Webserver on Ubuntu
+# Apache + PHP Webserver on Ubuntu
 
-An Apache HTTP Server running on Ubuntu 24.04 LTS inside a Docker container. The container automatically updates all packages to their latest versions on each deployment.
+An Apache HTTP Server with PHP support running on Ubuntu 24.04 LTS inside a Docker container. The container automatically updates all packages to their latest versions on each deployment.
 
 ## Requirements
 
@@ -16,7 +16,7 @@ An Apache HTTP Server running on Ubuntu 24.04 LTS inside a Docker container. The
 ├── entrypoint.sh           # Startup script (runs apt-get upgrade before Apache)
 ├── config/
 │   └── 000-default.conf    # Apache virtual host configuration
-├── html/                   # Web root (mount point for site content)
+├── html/                   # Web root (mount point for site content, including PHP files)
 └── README.md
 ```
 
@@ -88,7 +88,19 @@ docker compose up -d --build
 
 ### Serving Content
 
-Place your HTML, CSS, JavaScript, and other static files in the `html/` directory. They will be served at the root URL (`http://localhost/`).
+Place your HTML, CSS, JavaScript, PHP, and other site files in the `html/` directory. They will be served at the root URL (`http://localhost/`).
+
+For PHP websites, ensure your entry file is `index.php` (or explicitly request a `.php` file in the URL).
+
+Quick PHP test file:
+
+```bash
+cat > html/info.php <<'EOF'
+<?php phpinfo();
+EOF
+```
+
+Then open [http://localhost/info.php](http://localhost/info.php).
 
 ### Changing the Port
 
@@ -129,3 +141,4 @@ docker compose down --rmi local
 |-----------|---------|
 | Base OS   | Ubuntu 24.04 LTS (Noble Numbat) |
 | Web Server | Apache 2.4 (latest stable from Ubuntu repos) |
+| PHP Runtime | PHP (latest stable from Ubuntu repos) |
