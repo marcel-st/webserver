@@ -1,0 +1,13 @@
+services:
+  webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apache-webserver
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/var/www/html
+    restart: unless-stopped
+    environment:
+      - APACHE_LOG_DIR=/var/log/apache2
